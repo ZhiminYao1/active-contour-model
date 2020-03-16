@@ -1,9 +1,7 @@
-
 // ChanVese Segmentation Algorithm C++ file                    
 // Based on Project Paper Image Segmentation Using the Chan-Vese Algorithm    
 // By: Zhimin Yao  
 // Date: 2018.11
-
 
 #include "ChanVese.h"
 #include "opencv2/opencv.hpp"
@@ -13,9 +11,6 @@
 #include <algorithm>
 #include <vector>
 #include "opencv\cv.h"
-
-using namespace std;
-using namespace cv;
 
 ChanVese :: ChanVese()
 {
@@ -75,9 +70,6 @@ Mat ChanVese::ChanVese_seg(Mat& temp, Mat& mask, unsigned iteration){
 	//initial phi0
 	Mat mask_1, d_mask_0, d_mask_1, phi_0;
 	distanceTransform(mask, d_mask_0, CV_DIST_L2, CV_DIST_MASK_5);
-	/*cout << d_mask_0.type() << endl;
-	d_mask_0.convertTo(d_mask_0, CV_64FC1);
-	cout << d_mask_0.type() << endl;*/
 	
    	distanceTransform(1-mask, d_mask_1, CV_DIST_L2, CV_DIST_MASK_5);
 	
@@ -99,9 +91,6 @@ Mat ChanVese::ChanVese_seg(Mat& temp, Mat& mask, unsigned iteration){
 				force_image.ptr<double>(i)[j] = -pow((temp_1.ptr<double>(i)[j] - c[0]), 2) + pow((temp_1.ptr<double>(i)[j] - c[1]), 2);
 			}
 		}
-	/*	namedWindow("force_image", 0);
-		imshow("force_image", force_image);
-		waitKey();*/
 		//calculate the external force of the image
 		Mat Curv = Kappa(phi_0);
 		double minVal, maxVal;
@@ -115,14 +104,6 @@ Mat ChanVese::ChanVese_seg(Mat& temp, Mat& mask, unsigned iteration){
 		//check stop
 		Mat old_phi = phi_0;
 		Mat new_phi = phi_0 + dt*force;
-		//new_phi = phi_0;
-		//namedWindow("old_phi", 0);
-		//imshow("old_phi", old_phi);
-		//waitKey();
-
-		/*namedWindow("new_phi", 0);
-		imshow("new_phi", new_phi);
-		waitKey();*/
 
 		//check stop
 		bool flag = checkStop(old_phi, new_phi, dt,stop_parameter);

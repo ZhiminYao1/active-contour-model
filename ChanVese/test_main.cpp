@@ -9,7 +9,7 @@ using namespace cv;
 
 int main(int, char**)
 {
-	Mat src = imread("D:\\yzm\\data\\img_data\\ROI\\img_4_4\\9.bmp",0); // input gray scale image
+	Mat src = imread("9.bmp",0); // input gray scale image
  	Mat phi, temp;
 	double scale = 300. / min(src.rows, src.cols);
 	if (scale < 1){
@@ -30,14 +30,9 @@ int main(int, char**)
 		}
 	}
 	
-
   	// Segmentation
     phi = c.ChanVese_seg(temp, mask, 1000);
 	system("pause");
-	//namedWindow("Phi",0);
-	//imshow("Phi",phi);
-	//waitKey(-1);
-	
-	
+		
 	return 0;
 }
