@@ -1,5 +1,3 @@
 # active-contour-model
-## c++ Implement of Chan Vese Model  
-
-## Environment  
-opencv
+*c++ Implement of Chan Vese Model  
+*Libraries：opencv  
